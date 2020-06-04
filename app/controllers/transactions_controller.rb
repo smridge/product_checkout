@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class TransactionsController < ApplicationController
+  def index
+    render json: TransactionResults.new(start_date: filtering_params[:start_date], end_date: filtering_params[:end_date]).perform
+  end
+
   def create
     product_codes = transaction_params[:product_codes]
     return head :bad_request if product_codes.blank?
@@ -15,6 +19,10 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def filtering_params
+    params.slice(:start_date, :end_date)
+  end
 
   def transaction_params
     params.require(:transaction).permit(:product_codes)

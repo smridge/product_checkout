@@ -14,6 +14,14 @@ RSpec.describe "/transactions", type: :request do
     }
   end
 
+  describe "#index" do
+    it "renders a successful response" do
+      create(:transaction)
+      get(transactions_url, headers: valid_headers, as: :json)
+      expect(response).to be_successful
+    end
+  end
+
   describe "#create" do
     before do
       create(:product, :coca_cola)
