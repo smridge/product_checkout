@@ -10,10 +10,10 @@ class TransactionsController < ApplicationController
     return head :bad_request if product_codes.blank?
 
     product_codes = JSON.parse(product_codes)
-    @checkout = Checkout.new(product_codes: product_codes)
-    @checkout.perform
+    checkout = Checkout.new(product_codes: product_codes)
+    checkout.perform
 
-    render json: @checkout.transaction, status: :created
+    render json: checkout.transaction, status: :created
   rescue NoMethodError => _e
     render json: { error: "Ensure Array of Strings are Passed in" }, status: :unprocessable_entity
   end
