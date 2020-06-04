@@ -112,3 +112,8 @@ http://localhost:3000/transactions/?transaction[product_codes]=["CC", "PC", "WA"
   ```
   $ rspec spec/classes/checkout_spec.rb --format documentation
   ```
+
+## Running Linter
+```
+$ rubocop
+```
