@@ -4,10 +4,10 @@ class Checkout
   attr_accessor :transaction, :total
 
   def initialize(product_codes:)
-    @transaction    = Transaction.new
-    @product_fields = Product.all.pluck(:code, :discount_rules, :price)
-    @product_codes  = product_codes
-    @valid_product_codes = @product_codes.select { |code| @product_fields.map(&:first).include?(code) }
+    @transaction   = Transaction.new
+    @products      = Product.all
+    @product_codes = product_codes
+    @valid_product_codes = @product_codes.select { |code| @products.map(&:code).include?(code) }
     @products_tally      = @valid_product_codes.tally
     @total = 0.to_d
   end
@@ -25,14 +25,14 @@ class Checkout
 
   def calculate_total
     @products_tally.each do |code, count|
-      product_field = @product_fields.find { |rule| rule[0] == code }
+      product = @products.find { |rule| rule.code == code }
 
-      if product_field[1]["gte_3"] && count >= 3
-        apply_gte_3_discount(count, product_field[2])
-      elsif product_field[1]["bogo"] && count >= 2
-        apply_bogo_discount(count, product_field[2])
+      if product.gte_3 && count >= 3
+        apply_gte_3_discount(count, product.price)
+      elsif product.bogo && count >= 2
+        apply_bogo_discount(count, product.price)
       else
-        @total += count * product_field[2]
+        @total += count * product.price
       end
     end
   end
