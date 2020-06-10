@@ -19,5 +19,11 @@ Transaction.create(purchases: { "CC" => 2, "PC" => 3, "WA" => 1 }, total: 7.15)
 org1 = Organization.create(name: "Foo Org")
 org2 = Organization.create(name: "Bar Org")
 
-Credit.create(product_type: "contract", units: 10, organization_id: org1.id)
-Credit.create(product_type: "contract", units: 2, organization_id: org1.id)
+Credit.create(units: 10, organization_id: org1.id)
+Credit.create(units: 2, organization_id: org1.id)
+
+2.times do
+  Debit.create(units: 1, organization_id: org1.id)
+end
+
+Debit.create(units: 3, organization_id: org1.id)

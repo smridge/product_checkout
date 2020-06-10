@@ -15,6 +15,10 @@ RSpec.describe Organization, type: :model do
     it "has_many credits" do
       expect(described_class.reflect_on_association(:credits).macro).to eq(:has_many)
     end
+
+    it "has_many debits" do
+      expect(described_class.reflect_on_association(:debits).macro).to eq(:has_many)
+    end
   end
 
   describe "#validates" do

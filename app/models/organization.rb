@@ -3,6 +3,7 @@
 class Organization < ApplicationRecord
   has_secure_token :auth_token
   has_many :credits, dependent: :restrict_with_error
+  has_many :debits, dependent: :restrict_with_error
 
   validates :name, presence: true
 
