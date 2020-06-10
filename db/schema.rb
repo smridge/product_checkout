@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_213628) do
+ActiveRecord::Schema.define(version: 2020_06_10_205024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "auth_token", null: false
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["auth_token"], name: "index_organizations_on_auth_token", unique: true
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
