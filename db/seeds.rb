@@ -16,5 +16,8 @@ Transaction.create(purchases: { "CC" => 1, "PC" => 1, "WA" => 1 }, total: 4.35)
 Transaction.create(purchases: { "CC" => 3, "PC" => 1 }, total: 5.0)
 Transaction.create(purchases: { "CC" => 2, "PC" => 3, "WA" => 1 }, total: 7.15)
 
-Organization.create(name: "Foo Org")
-Organization.create(name: "Bar Org")
+org1 = Organization.create(name: "Foo Org")
+org2 = Organization.create(name: "Bar Org")
+
+Credit.create(product_type: "contract", units: 10, organization_id: org1.id)
+Credit.create(product_type: "contract", units: 2, organization_id: org1.id)

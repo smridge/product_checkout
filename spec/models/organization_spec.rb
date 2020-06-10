@@ -11,6 +11,12 @@ RSpec.describe Organization, type: :model do
     end
   end
 
+  describe "#associations" do
+    it "has_many credits" do
+      expect(described_class.reflect_on_association(:credits).macro).to eq(:has_many)
+    end
+  end
+
   describe "#validates" do
     context "without required fields" do
       it "throws errors" do
