@@ -64,10 +64,12 @@ Lint/StructNewOverride:
 
 
 Metrics/BlockLength:
-  Enabled: false
+  Exclude:
+    - "spec/**/*"
 
 Metrics/MethodLength:
   Enabled: false
+
 
 RSpec/MessageSpies:
   Enabled: false
