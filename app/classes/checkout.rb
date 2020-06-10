@@ -27,26 +27,14 @@ class Checkout
     @products_tally.each do |code, count|
       product = @products.find { |rule| rule.code == code }
 
-      if product.gte_3 && count >= 3
-        apply_gte_3_discount(count, product.price)
-      elsif product.bogo && count >= 2
-        apply_bogo_discount(count, product.price)
-      else
-        @total += count * product.price
-      end
+      @total +=
+        if product.gte_3 && count >= 3
+          DiscountCalcs.apply_20_percent_off(count: count, price: product.price)
+        elsif product.bogo && count >= 2
+          DiscountCalcs.apply_bogo(count: count, price: product.price)
+        else
+          count * product.price
+        end
     end
-  end
-
-  def apply_gte_3_discount(count, price)
-    @total += count * price * 0.8
-  end
-
-  def apply_bogo_discount(count, price)
-    @total +=
-      if count.even?
-        count / 2 * price
-      else
-        (count / 2 * price) + price
-      end
   end
 end
