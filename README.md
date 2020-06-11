@@ -102,6 +102,21 @@ http://localhost:3000/transactions/?transaction[product_codes]=["CC", "PC", "WA"
 }
 ```
 
+### Get Credit Balance via `GET`
+```
+http://localhost:3000/your-org-slug/balance
+```
+
+#### Example `GET` Response
+```json
+{
+  "org": {
+    "slug": "your-org-slug",
+    "balance": "7"
+  }
+}
+```
+
 ## Running Tests
 - Entire Suite
   ```
