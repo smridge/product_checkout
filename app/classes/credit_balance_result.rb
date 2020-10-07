@@ -3,8 +3,8 @@
 class CreditBalanceResult
   def initialize(organization:)
     @organization = organization
-    @credit_units = Credit.by_organization(@organization.id).sum(&:units)
-    @debit_units  = Debit.by_organization(@organization.id).sum(&:units)
+    @credit_units = organization.credits.sum(&:units)
+    @debit_units  = organization.debits.sum(&:units)
   end
 
   def perform

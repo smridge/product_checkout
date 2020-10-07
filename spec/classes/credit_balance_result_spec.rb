@@ -4,8 +4,8 @@ RSpec.describe CreditBalanceResult do
   describe "#perform" do
     context "with debits and credits" do
       let(:organization) { create(:organization, :with_credits_and_debits) }
-      let(:credit_units) { Credit.by_organization(organization.id).sum(&:units) }
-      let(:debit_units) { Debit.by_organization(organization.id).sum(&:units) }
+      let(:credit_units) { organization.credits.sum(&:units) }
+      let(:debit_units) { organization.debits.sum(&:units) }
 
       it "returns hash with slug and balance with organization argument" do
         result = described_class.new(organization: organization).perform
