@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Transaction, type: :model do
   describe "#discount_rules" do
     it "is a store accessor" do

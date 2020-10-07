@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "/transactions", type: :request do
   let(:valid_headers) do
     {
@@ -15,10 +13,21 @@ RSpec.describe "/transactions", type: :request do
   end
 
   describe "#index" do
-    it "renders a successful response" do
-      create(:transaction)
+    it "returns response" do
       get(transactions_url, headers: valid_headers, as: :json)
       expect(response).to be_successful
+    end
+
+    it "returns response body" do
+      transaction = create(:transaction)
+      get(transactions_url, headers: valid_headers, as: :json)
+
+      expect(response.body).to match_json_expression(
+        {
+          transactions: [{ total: transaction.total, purchases: transaction.purchases, created_at: wildcard_matcher }],
+          purchase_totals: transaction.total
+        }
+      )
     end
   end
 
@@ -32,21 +41,24 @@ RSpec.describe "/transactions", type: :request do
     context "with valid parameters" do
       let(:valid_attributes) { { product_codes: %w[CC PC WA].to_json } }
 
-      it "initializes Checkout class" do
-        expect(Checkout).to receive(:new).with(product_codes: JSON.parse(valid_attributes[:product_codes])).and_call_original
-        post(transactions_url, params: { transaction: valid_attributes }, headers: valid_headers, as: :json)
-      end
-
       it "creates transaction" do
         expect do
           post(transactions_url, params: { transaction: valid_attributes }, headers: valid_headers, as: :json)
         end.to change(Transaction, :count).by(1)
       end
 
-      it "renders a JSON response with the new transaction" do
+      it "returns response" do
         post(transactions_url, params: { transaction: valid_attributes }, headers: valid_headers, as: :json)
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+      end
+
+      it "returns response body" do
+        post(transactions_url, params: { transaction: valid_attributes }, headers: valid_headers, as: :json)
+        transaction = Transaction.last
+
+        expect(response.body).to match_json_expression(
+          { id: transaction.id, details: transaction.details, created_at: wildcard_matcher, updated_at: wildcard_matcher }
+        )
       end
     end
 
@@ -59,10 +71,14 @@ RSpec.describe "/transactions", type: :request do
         end.to change(Transaction, :count).by(0)
       end
 
-      it "renders a JSON response with errors for the new transaction" do
+      it "returns response" do
         post(transactions_url, params: { transaction: invalid_attributes }, headers: valid_headers, as: :json)
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json; charset=utf-8")
+      end
+
+      it "returns response body" do
+        post(transactions_url, params: { transaction: invalid_attributes }, headers: valid_headers, as: :json)
+        expect(response.body).to match_json_expression({ error: "Ensure Array of Strings are Passed in" })
       end
     end
 
@@ -75,10 +91,9 @@ RSpec.describe "/transactions", type: :request do
         end.to change(Transaction, :count).by(0)
       end
 
-      it "renders a JSON response with errors for the new transaction" do
+      it "returns response" do
         post(transactions_url, params: { transaction: invalid_attributes }, headers: valid_headers, as: :json)
         expect(response).to have_http_status(:bad_request)
-        expect(response.content_type).to eq("application/json")
       end
     end
   end

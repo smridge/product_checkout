@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe TransactionResults do
   describe "#perform" do
     before { create(:transaction) }
@@ -41,8 +39,7 @@ RSpec.describe TransactionResults do
 
     it "returns purchase totals as stringified decimal" do
       purchase_totals = described_class.new.perform[:purchase_totals]
-      expect(purchase_totals).to be_a(String)
-      expect(purchase_totals.to_d).to eq(4.35)
+      expect(purchase_totals).to eq(4.35.to_s)
     end
   end
 end

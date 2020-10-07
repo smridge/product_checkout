@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Debit, type: :model do
   describe "#associations" do
     it "belongs_to organization" do

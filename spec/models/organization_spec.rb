@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Organization, type: :model do
   describe "#has_secure_token" do
     it "generates a 24-character unique auth_token on creating new record" do

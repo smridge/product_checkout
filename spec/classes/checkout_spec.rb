@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Checkout do
   before do
     create(:product, :coca_cola)
