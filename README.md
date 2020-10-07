@@ -1,11 +1,8 @@
 # Product Checkout
 
-## Install if needed
-
-### Ruby Version
-```bash
-$ rvm install "ruby-2.7.1"
-```
+## Install Ruby
+  - Install Ruby Version Manager (`rvm`, `rbenv`, `chruby`, `asdf` are common ones)
+  - Check `.ruby-version` for correct ruby version to install.
 
 ### Postgresql
 ```
@@ -17,7 +14,7 @@ $ brew install postgresql
 $ git clone git@github.com:smridge/product_checkout.git
 $ cd product_checkout
 $ bundle install
-$ rails db:setup
+$ bundle exec rails db:setup
 $ bundle exec rails s
 ```
 
@@ -120,15 +117,15 @@ http://localhost:3000/your-org-slug/balance
 ## Running Tests
 - Entire Suite
   ```
-  $ rspec spec --format documentation
+  $ bundle exec rspec spec --format documentation
   ```
 
 - Specific Unit
   ```
-  $ rspec spec/classes/checkout_spec.rb --format documentation
+  $ bundle exec rspec spec/classes/checkout_spec.rb --format documentation
   ```
 
 ## Running Linter
 ```
-$ rubocop
+$ bundle exec rubocop
 ```
