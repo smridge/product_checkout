@@ -4,6 +4,7 @@ require:
   - rubocop-rspec
 
 AllCops:
+  NewCops: enable
   Exclude:
     - "db/**/*"
     - "config/**/*"
@@ -11,30 +12,6 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
-
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Style/RedundantFetchBlock:
-  Enabled: true
-
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-
-Style/RedundantRegexpEscape:
-  Enabled: true
-
-Style/SlicingWithRange:
-  Enabled: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -49,22 +26,6 @@ Layout/EmptyLinesAroundAttributeAccessor:
 Layout/LineLength:
   Max: 130
 
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
-
 
 Metrics/BlockLength:
   Exclude:
@@ -76,6 +37,3 @@ Metrics/MethodLength:
 
 RSpec/MessageSpies:
   Enabled: false
-
-RSpec/MultipleExpectations:
-  Max: 2
