@@ -129,3 +129,9 @@ http://localhost:3000/your-org-slug/balance
 ```
 $ bundle exec rubocop
 ```
+
+## Generate Docs
+```
+bundle exec rake docs:generate
+open doc/api/index.html
+```

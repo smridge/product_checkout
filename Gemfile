@@ -13,6 +13,9 @@ gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 4.1"
 gem "rack-cors"
 
+# docs
+gem "rspec_api_documentation"
+
 group :development, :test do
   gem "database_cleaner"
   gem "factory_bot_rails"
