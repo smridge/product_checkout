@@ -30,3 +30,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 end
+
+RspecApiDocumentation.configure do |config|
+  config.format = :open_api
+  config.configurations_dir = Rails.root.join("config")
+end

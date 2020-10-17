@@ -1,0 +1,21 @@
+swagger: '2.0'
+info:
+  title: Product Checkout API
+  description: Auto Generated Rspec API Documentation Example
+  termsOfService: 'http://open-api.io/terms/'
+  contact:
+    name: Sarah Ridge
+    url: 'https://github.com/smridge/product_checkout'
+    email: sarahmarie@hey.com
+  license:
+    name: MIT
+    url: 'https://github.com/smridge/product_checkout/blob/master/LICENSE'
+  version: 1.0.0
+host: 'localhost:3000'
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
