@@ -32,6 +32,8 @@ RSpec.configure do |config|
 end
 
 RspecApiDocumentation.configure do |config|
-  config.format = :open_api
+  config.api_name = "Product Checkout API"
+  config.api_explanation = "Auto Generated Rspec API Documentation Example"
+  config.format = [:open_api, :html]
   config.configurations_dir = Rails.root.join("config")
 end
