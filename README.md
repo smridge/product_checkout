@@ -135,3 +135,6 @@ $ bundle exec rubocop
 bundle exec rake docs:generate
 open doc/api/index.html
 ```
+
+### View Swagger Documentation
+https://app.swaggerhub.com/apis-docs/smridge/product_checkout/1.0.0
